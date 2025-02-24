@@ -86,6 +86,50 @@ Estamos ansiosos para ver sua implementação e criatividade em ação! Boa sort
 
 
 
+## Deployment
+
+`backend is running on port 3000` **localhost:3000**
+
+`WebUi is running on port 5173` **localhost:5173**
+
+```bash
+  git clone git@github.com:BrunoPoiano/ozmap-test.git
+  cd ozmap-test
+```
+
+### .env
+```bash
+  cd backend
+  cp .env.exemple .env
+```
+```bash
+  cd frontend
+  cp .env.exemple .env
+```
+Add your geocoding api key on both .env
+
+
+### Docker
+```bash
+docker compose up
+```
+
+### To run manually
+```bash
+  cd backend
+  npm run dev
+```
+
+```bash
+  cd frontend
+  npm run dev
+```
+
+### Tests
+```bash
+  cd backend
+  npm run test
+```
 ## API
 
 #### Sign In
