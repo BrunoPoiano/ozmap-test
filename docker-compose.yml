@@ -1,0 +1,33 @@
+services:
+  ozmap_backend:
+    build: backend/.
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo_db
+    env_file:
+      - backend/.env
+
+  ozmap_frontend:
+    build: frontend/.
+    ports:
+      - "5173:5173"
+    depends_on:
+      - ozmap_backend
+    env_file:
+      - frontend/.env
+
+  mongo_db:
+    image: docker.io/library/mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_ROOT_USERNAME=admin
+    ports:
+      - "27017:27017"
+    container_name: mongodb
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
