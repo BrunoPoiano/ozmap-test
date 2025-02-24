@@ -20,8 +20,8 @@ const setColorTheme = () => {
   const sun = document.getElementById('sun')
 
   localStorage.setItem('theme', colorScheme.value)
-  moon?.setAttribute('data-visible', colorScheme.value === 'light')
-  sun?.setAttribute('data-visible', colorScheme.value === 'dark')
+  moon?.setAttribute('data-visible', (colorScheme.value === 'light').toString())
+  sun?.setAttribute('data-visible', (colorScheme.value === 'dark').toString())
   document.documentElement.style.setProperty('color-scheme', colorScheme.value)
 }
 const changeColorTheme = () => {

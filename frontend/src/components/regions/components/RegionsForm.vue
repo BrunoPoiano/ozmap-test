@@ -85,8 +85,10 @@ import TrashCan from '@/components/global/svgs/TrashCan.vue'
 
 type FormState = {
   name: string
-  coordinates: [number, number][]
+  coordinates: Coordinates[]
 }
+
+type Coordinates = [number, number]
 
 export default defineComponent({
   components: {
@@ -160,11 +162,12 @@ export default defineComponent({
     },
     openModal() {
       if (this.content) {
-        const geoJson = this.content.geojson.coordinates.flat()
-        geoJson.pop()
+        const geojson = this.content.geojson.coordinates[0]
+        geojson.pop()
+
         this.form = {
           name: this.content.name,
-          coordinates: geoJson,
+          coordinates: geojson as [number, number][],
         }
       }
 

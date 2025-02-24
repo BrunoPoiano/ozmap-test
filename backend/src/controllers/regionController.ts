@@ -43,6 +43,7 @@ export const createRegion = async (req: Request, resp: Response) => {
     resp.status(500).json({ message: 'Error creating region', error: error });
   }
 };
+
 export const updateRegion = async (req: Request, resp: Response) => {
   try {
     const user = req?.user;
@@ -51,11 +52,14 @@ export const updateRegion = async (req: Request, resp: Response) => {
     }
     const regionId = req.params.id;
     const regionData = req.body;
-    regionData.name = regionData.name.toLowerCase();
+
 
     const region = await RegionModel.findOneAndUpdate(
       { _id: regionId, user: user._id },
-      regionData,
+      {
+        name: regionData.name.toLowerCase(),
+        geojson: { type: 'Polygon', coordinates: regionData.coordinates }
+      },
       {}
     );
 

@@ -15,7 +15,7 @@ const databaseInit = async () => {
     console.log('Already connected to the main database.');
     return;
   }
-  const MONGO_URI = `mongodb://${process.env.MONGO_PASSWORD}:${process.env.MONGO_USERNAME}@localhost:${process.env.MONGO_PORT}/${process.env.MONGO_NAME}?authSource=admin`;
+  const MONGO_URI = `mongodb://${process.env.MONGO_PASSWORD}:${process.env.MONGO_USERNAME}@mongo_db:${process.env.MONGO_PORT}/${process.env.MONGO_NAME}?authSource=admin`;
   try {
     await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,

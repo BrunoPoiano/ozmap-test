@@ -81,11 +81,11 @@ export type Region = {
 }
 type GeoJson = {
   type: string
-  coordinates: [[[Coordinates]]]
+  coordinates: [[Coordinates]]
 }
 type Coordinates = [number, number]
 
-const debounced = ref(null)
+const debounced = ref<number | null>(null)
 const filter = ref({
   search_type: 'name',
   search: '',
@@ -96,7 +96,7 @@ const filter = ref({
 })
 const regions = ref<Region[]>([])
 
-const debounce = (delay: number, func: Function): Function => {
+const debounce = (delay: number, func: () => void) => {
   return () => {
     if (debounced.value) {
       clearTimeout(debounced.value)
