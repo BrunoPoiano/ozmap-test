@@ -265,7 +265,7 @@ docker compose up
 
 #### Edit Region
 ```http
-  PUT /api/api/{_id}
+  PUT /api/region/{_id}
 ```
 | Header        | type                | Description                     |
 | :----------   | :----------         | :----------                     |
@@ -280,7 +280,7 @@ docker compose up
 
 #### Delete Region
 ```http
-  DELETE /api/api/{_id}
+  DELETE /api/region/{_id}
 ```
 | Header        | type                | Description                     |
 | :----------   | :----------         | :----------                     |
@@ -290,7 +290,3 @@ docker compose up
 
 
 https://github.com/user-attachments/assets/04610487-8359-486f-81b5-569c98e5d161
-
-
-
-

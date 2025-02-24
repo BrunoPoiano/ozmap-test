@@ -66,7 +66,6 @@ export default {
   }
 
   details {
-    display: flex;
     cursor: pointer;
     background-color: light-dark(#f5f5f5, #0000002e);
     border-radius: 0.5rem;

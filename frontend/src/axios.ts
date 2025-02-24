@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from './router'
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_END_POINT,
@@ -19,6 +20,7 @@ axiosInstance.interceptors.response.use(
       if (error.response.status === 401) {
         localStorage.removeItem('USER_TOKEN')
         localStorage.removeItem('USER_DATA')
+        window.location.href = '/login'
       }
     } else if (error.request) {
       console.error('No response received:', error.request)
