@@ -286,3 +286,11 @@ docker compose up
 | :----------   | :----------         | :----------                     |
 | `Content-Type`| `string`            | **required** `application/json` |
 | `token`       | `string`            | **required** `Bearer token`     |
+
+
+
+https://github.com/user-attachments/assets/04610487-8359-486f-81b5-569c98e5d161
+
+
+
+
