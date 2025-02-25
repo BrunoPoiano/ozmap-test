@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["es5", "es6", "es2017"],
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "strict": true,
+    "types": ["node", "jest"]
+  },
+  "types": ["reflect-metadata", "mocha"],
+  "exclude": ["node_modules"],
+  "include": ["*.ts", "src/**/*.ts", "src/types/**/*.d.ts"]
+}
