@@ -7,7 +7,14 @@
       <form @submit.prevent="sendForm">
         <div>
           <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" v-model="form.name" required />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Nome da região"
+            v-model="form.name"
+            required
+          />
         </div>
         <div>
           <div
@@ -21,6 +28,7 @@
               <input
                 type="number"
                 step="any"
+                required
                 :id="`lat-${index}`"
                 v-model="coordinate[0]"
                 placeholder="Latitude"
@@ -31,6 +39,7 @@
               <input
                 type="number"
                 step="any"
+                required
                 :id="`lng-${index}`"
                 v-model="coordinate[1]"
                 placeholder="Longitude"
@@ -143,20 +152,40 @@ export default defineComponent({
 
       switch (this.action) {
         case 'create':
-          axiosInstance.post('region', params).then(() => {
-            alert('Regiao criada com sucesso!')
-            this.form = { name: '', coordinates: [] }
-            this.closeModal()
-            this.$emit('refreshRegions')
-          })
+          axiosInstance
+            .post('region', params)
+            .then(() => {
+              alert('Regiao criada com sucesso!')
+              this.form = { name: '', coordinates: [] }
+              this.closeModal()
+              this.$emit('refreshRegions')
+            })
+            .catch((error) => {
+              if (error.response?.data?.errors[0]) {
+                alert(error.response.data.errors[0].msg)
+              } else {
+                alert('Erro ao salvar!')
+              }
+              console.error('Error:', error.response.data)
+            })
           break
         case 'edit':
-          axiosInstance.put(`region/${this.content?._id}`, params).then(() => {
-            alert('Regiao atualizada com sucesso!')
-            this.form = { name: '', coordinates: [] }
-            this.closeModal()
-            this.$emit('refreshRegions')
-          })
+          axiosInstance
+            .put(`region/${this.content?._id}`, params)
+            .then(() => {
+              alert('Regiao atualizada com sucesso!')
+              this.form = { name: '', coordinates: [] }
+              this.closeModal()
+              this.$emit('refreshRegions')
+            })
+            .catch((error) => {
+              if (error.response?.data?.errors[0]) {
+                alert(error.response.data.errors[0].msg)
+              } else {
+                alert('Erro ao salvar!')
+              }
+              console.error('Error:', error.response.data)
+            })
           break
       }
     },

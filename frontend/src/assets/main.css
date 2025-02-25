@@ -144,12 +144,11 @@ img {
 }
 
 button {
+  color: lch(from var(--bg) calc((49.44 - l) * infinity) 0 0);
+  background: var(--bg);
+
   cursor: pointer;
   min-width: min(10ch, 100%);
-  --bg: light-dark(#efefef, #3c3c3c);
-  background: var(--bg);
-  color: lch(from var(--bg) calc((49.44 - l) * infinity) 0 0);
-
   padding: 0.5rem 1rem;
   border-radius: 10px;
   border: none;
@@ -216,9 +215,9 @@ dialog {
   max-width: 30rem;
   width: 100%;
 
-  -webkit-box-shadow: 0px 0px 12px 0px var(--neutral-color-100);
-  -moz-box-shadow: 0px 0px 12px 0px var(--neutral-color-100);
-  box-shadow: 0px 0px 12px 0px var(--neutral-color-100);
+  -webkit-box-shadow: 0px 0px 12px 0px #000000a6;
+  -moz-box-shadow: 0px 0px 12px 0px #000000a6;
+  box-shadow: 0px 0px 12px 0px #000000a6;
 
   button[data-modal-close] {
     background: none;
@@ -232,6 +231,14 @@ dialog {
 
     display: grid;
     place-items: center;
+  }
+
+  &::backdrop {
+    background: #00000085;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.1px);
+    -webkit-backdrop-filter: blur(6.1px);
   }
 }
 

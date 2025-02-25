@@ -31,10 +31,11 @@
           name="password"
           type="password"
           required
-          placeholder="Minimo 6 characters"
-          minlength="6"
+          placeholder="Minimo 8 characters"
+          minlength="8"
           :disabled="loading"
         />
+        <small> Minimo 8 characters</small>
       </div>
       <div>
         <label for="">Endereço</label>
@@ -77,6 +78,7 @@ const sendForm = (e: Event) => {
   axiosInstance
     .post('/signin', formObject)
     .then(() => {
+      alert('Usuário criado com sucesso!')
       router.push('/login')
     })
     .catch((error) => {

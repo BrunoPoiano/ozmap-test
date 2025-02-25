@@ -112,11 +112,18 @@ const sendForm = async (e: Event) => {
   axiosInstance
     .put('/user', formObject)
     .then(({ data }) => {
+      alert('Salvo com sucesso!')
       localStorage.setItem('USER_DATA', JSON.stringify(data.user))
       userInfo.value = data.user
     })
     .catch((error) => {
-      console.error('Error:', error.response ? error.response.data : error.message)
+      if (error.response?.data?.errors[0]) {
+        alert(error.response.data.errors[0].msg)
+      } else {
+        alert('Erro ao salvar!')
+      }
+      console.error('Error:', error.response.data)
+      userInfo.value = JSON.parse(localStorage.getItem('USER_DATA') || '{}')
     })
     .finally(() => {
       loadingForm.value = false
