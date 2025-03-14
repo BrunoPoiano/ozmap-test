@@ -24,7 +24,7 @@ export const hashPassword = async (password: string): Promise<string> => {
 
 export const generateToken = (user: User) => {
   return jwt.sign(
-    { id: user._id, email: user.email, password: user.password },
+    { id: user._id, email: user.email },
     jwtConfig.secret as string,
     { expiresIn: jwtConfig.expiresIn }
   );

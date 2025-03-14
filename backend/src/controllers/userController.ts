@@ -42,7 +42,7 @@ export const updateUser = async (req: Request, resp: Response) => {
     const updatedUser = await UserModel.findOneAndUpdate(
       { _id: user?._id },
       userData,
-      { new: true, upsert: true, runValidators: true }
+      { new: true, runValidators: true }
     );
 
     return resp
@@ -51,7 +51,7 @@ export const updateUser = async (req: Request, resp: Response) => {
   } catch (err) {
     return resp
       .status(500)
-      .json({ error: 'error updating user', details: err });
+      .json({ error: 'error updating user' });
   }
 };
 
@@ -63,7 +63,7 @@ export const deleteUser = async (req: Request, resp: Response) => {
     return resp.status(200).json({ message: 'User deleted' });
   } catch (err) {
     console.error('Error deleting user:', err);
-    return resp.status(500).json(err);
+    return resp.status(500).json({ error: 'error deleting user' });
   }
 };
 
@@ -72,6 +72,6 @@ export const loggedUser = async (req: Request, resp: Response) => {
     return resp.status(200).json(req.user);
   } catch (err) {
     console.error('Error getting logged user:', err);
-    return resp.status(500).json(err);
+    return resp.status(500).json({ error: 'error logging user' });
   }
 };

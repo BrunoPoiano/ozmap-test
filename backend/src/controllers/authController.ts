@@ -48,7 +48,7 @@ export const createUser = async (req: Request, resp: Response) => {
     console.error('Error creating user:', err);
     return resp
       .status(500)
-      .json({ error: 'Failed to create user', details: err });
+      .json({ error: 'An unexpected error occurred' });
   }
 };
 
@@ -76,6 +76,6 @@ export const login = async (req: Request, resp: Response) => {
     console.error('Error logging user:', error);
     return resp
       .status(401)
-      .json({ error: 'Failed to lo user', details: error });
+      .json({ error: 'An unexpected error occurred' });
   }
 };

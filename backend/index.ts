@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 import { databaseInit, testDatabaseInit } from './src/database';
 import routes from './src/routes/index';

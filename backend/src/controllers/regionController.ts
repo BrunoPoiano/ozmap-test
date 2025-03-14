@@ -15,7 +15,7 @@ export const getRegion = async (req: Request, resp: Response) => {
     resp.status(200).json(regions);
   } catch (error) {
     console.error(error);
-    resp.status(500).json({ message: 'Error getting regions', error: error });
+    resp.status(500).json({ message: 'Error getting regions' });
   }
 };
 
@@ -35,7 +35,7 @@ export const createRegion = async (req: Request, resp: Response) => {
     resp.status(201).json({ region: newRegion });
   } catch (error) {
     console.error(error);
-    resp.status(500).json({ message: 'Error creating region', error: error });
+    resp.status(500).json({ message: 'Error creating region'});
   }
 };
 
@@ -60,7 +60,7 @@ export const updateRegion = async (req: Request, resp: Response) => {
       .json({ message: 'Region updated successfully', region: region });
   } catch (error) {
     console.error(error);
-    resp.status(500).json({ message: 'Error updating region', error: error });
+    resp.status(500).json({ message: 'Error updating region' });
   }
 };
 export const deleteRegion = async (req: Request, resp: Response) => {
@@ -74,7 +74,7 @@ export const deleteRegion = async (req: Request, resp: Response) => {
     resp.status(200).json({ message: 'Region deleted successfully' });
   } catch (error) {
     console.error(error);
-    resp.status(500).json({ message: 'Error deleting region', error: error });
+    resp.status(500).json({ message: 'Error deleting region' });
   }
 };
 
@@ -86,9 +86,7 @@ export const findRegion = async (req: Request, resp: Response) => {
     const longitude = Number.parseFloat(req.query.longitude as string);
 
     if (!latitude || !longitude) {
-      return resp
-        .status(500)
-        .json({ message: 'missing latitude or longitude' });
+      return resp.status(400).json({ message: 'missing latitude or longitude' });
     }
 
     const regions = await RegionModel.find({
@@ -106,7 +104,7 @@ export const findRegion = async (req: Request, resp: Response) => {
     resp.status(200).json(regions);
   } catch (error) {
     console.error(error);
-    resp.status(500).json({ message: 'Error finding region', error: error });
+    resp.status(500).json({ message: 'Error finding region' });
   }
 };
 
@@ -124,9 +122,7 @@ export const findRegionNear = async (req: Request, resp: Response) => {
     const searchAll = req.query.searchAll || 'false';
 
     if (!latitude || !longitude) {
-      return resp
-        .status(500)
-        .json({ message: 'missing latitude or longitude' });
+      return resp.status(400).json({ message: 'missing latitude or longitude' });
     }
 
     let query = {};
@@ -159,6 +155,6 @@ export const findRegionNear = async (req: Request, resp: Response) => {
     resp.status(200).json(regions);
   } catch (error) {
     console.error(error);
-    resp.status(500).json({ message: 'Error finding region', error: error });
+    resp.status(500).json({ message: 'Error finding region' });
   }
 };

@@ -23,8 +23,6 @@ export const userMiddleware = async (
     next();
   } catch (error) {
     console.error('Error in userMiddleware', error);
-    return res
-      .status(500)
-      .json({ message: 'Failed to authenticate user', error });
+    return res.status(401).json({ message: 'Failed to authenticate user', error });
   }
 };
