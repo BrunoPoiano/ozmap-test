@@ -5,13 +5,10 @@ import { RegionModel, UserModel } from '../models';
 export const getRegion = async (req: Request, resp: Response) => {
   try {
     const user = req?.user;
-    if (!user) {
-      return resp.status(401).json({ error: 'User not found' });
-    }
 
     const search = req.query.search || '';
     const regions = await RegionModel.find({
-      user: user._id,
+      user: user?._id,
       name: { $regex: search, $options: 'i' },
     });
 
@@ -25,19 +22,17 @@ export const getRegion = async (req: Request, resp: Response) => {
 export const createRegion = async (req: Request, resp: Response) => {
   try {
     const user = req?.user;
-    if (!user) {
-      return resp.status(401).json({ error: 'User not found' });
-    }
+
     const { name, coordinates } = req.body;
 
     const newRegion = new RegionModel({
-      user: user._id,
+      user: user?._id,
       name: name.toLowerCase(),
       geojson: { type: 'Polygon', coordinates: coordinates },
     });
     await newRegion.save();
 
-    resp.status(200).json({ region: newRegion });
+    resp.status(201).json({ region: newRegion });
   } catch (error) {
     console.error(error);
     resp.status(500).json({ message: 'Error creating region', error: error });
@@ -47,18 +42,15 @@ export const createRegion = async (req: Request, resp: Response) => {
 export const updateRegion = async (req: Request, resp: Response) => {
   try {
     const user = req?.user;
-    if (!user) {
-      return resp.status(401).json({ error: 'User not found' });
-    }
+
     const regionId = req.params.id;
     const regionData = req.body;
 
-
     const region = await RegionModel.findOneAndUpdate(
-      { _id: regionId, user: user._id },
+      { _id: regionId, user: user?._id },
       {
         name: regionData.name.toLowerCase(),
-        geojson: { type: 'Polygon', coordinates: regionData.coordinates }
+        geojson: { type: 'Polygon', coordinates: regionData.coordinates },
       },
       {}
     );
@@ -74,12 +66,10 @@ export const updateRegion = async (req: Request, resp: Response) => {
 export const deleteRegion = async (req: Request, resp: Response) => {
   try {
     const user = req?.user;
-    if (!user) {
-      return resp.status(401).json({ error: 'User not found' });
-    }
+
     const regionId = req.params.id;
 
-    await RegionModel.deleteOne({ _id: regionId, user: user._id });
+    await RegionModel.deleteOne({ _id: regionId, user: user?._id });
 
     resp.status(200).json({ message: 'Region deleted successfully' });
   } catch (error) {
@@ -91,9 +81,6 @@ export const deleteRegion = async (req: Request, resp: Response) => {
 export const findRegion = async (req: Request, resp: Response) => {
   try {
     const user = req?.user;
-    if (!user) {
-      return resp.status(401).json({ error: 'User not found' });
-    }
 
     const latitude = Number.parseFloat(req.query.latitude as string);
     const longitude = Number.parseFloat(req.query.longitude as string);
@@ -113,7 +100,7 @@ export const findRegion = async (req: Request, resp: Response) => {
           },
         },
       },
-      user: user._id,
+      user: user?._id,
     }).lean();
 
     resp.status(200).json(regions);
@@ -126,9 +113,6 @@ export const findRegion = async (req: Request, resp: Response) => {
 export const findRegionNear = async (req: Request, resp: Response) => {
   try {
     const user = req?.user;
-    if (!user) {
-      return resp.status(401).json({ error: 'User not found' });
-    }
 
     const latitude = Number.parseFloat(req.query.latitude as string);
     const longitude = Number.parseFloat(req.query.longitude as string);
@@ -146,7 +130,7 @@ export const findRegionNear = async (req: Request, resp: Response) => {
     }
 
     let query = {};
-    if (searchAll === 'false') query = { user: user._id };
+    if (searchAll === 'false') query = { user: user?._id };
 
     const regions = await RegionModel.aggregate([
       {

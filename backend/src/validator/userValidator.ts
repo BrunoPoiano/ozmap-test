@@ -55,7 +55,9 @@ export const userValidator = async (
   ]);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return resp.status(400).json({ message:"Error in userValidator", errors: errors.array() });
+    return resp
+      .status(400)
+      .json({ message: 'Error in userValidator', errors: errors.array() });
   }
 
   return next();

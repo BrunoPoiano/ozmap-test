@@ -23,7 +23,9 @@ export const loginValidator = async (
   ]);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return resp.status(400).json({ message: "Error in loginValidator", errors: errors.array() });
+    return resp
+      .status(400)
+      .json({ message: 'Error in loginValidator', errors: errors.array() });
   }
 
   return next();
