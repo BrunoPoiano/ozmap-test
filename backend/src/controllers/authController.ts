@@ -17,6 +17,11 @@ export const createUser = async (req: Request, resp: Response) => {
         .json({ error: 'Send only coordinates or address' });
     }
 
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+      return resp.status(400).json({ error: 'Email already in use' });
+    }
+
     const newUser = new UserModel({
       name: name,
       email: email,
@@ -70,7 +75,7 @@ export const login = async (req: Request, resp: Response) => {
   } catch (error) {
     console.error('Error logging user:', error);
     return resp
-      .status(500)
+      .status(401)
       .json({ error: 'Failed to lo user', details: error });
   }
 };

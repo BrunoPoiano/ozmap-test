@@ -32,7 +32,9 @@ export const regionValidator = async (
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return resp.status(400).json({ message:"Error in regionValidator", errors: errors.array() });
+    return resp
+      .status(400)
+      .json({ message: 'Error in regionValidator', errors: errors.array() });
   }
   return next();
 };
@@ -59,7 +61,12 @@ export const regionFindValidator = async (
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return resp.status(400).json({ message: "Error in regionFindValidator", errors: errors.array() });
+    return resp
+      .status(400)
+      .json({
+        message: 'Error in regionFindValidator',
+        errors: errors.array(),
+      });
   }
   return next();
 };
